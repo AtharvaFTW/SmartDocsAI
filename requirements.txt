@@ -2,4 +2,4 @@ streamlit>=1.26.0
 pdfplumber
 sentence-transformers==2.2.2
 transformers==4.31.0
-faiss-cpu==1.7.4
+https://github.com/cosmic-cortex/streamlit-faiss-fix/releases/download/v1.0/faiss_cpu-1.7.4-cp39-cp39-manylinux2014_x86_64.whl
