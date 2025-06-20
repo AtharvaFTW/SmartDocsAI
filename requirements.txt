@@ -2,6 +2,5 @@ streamlit>=1.26.0
 pdfplumber
 scikit-learn
 sentence-transformers==2.2.2
-transformers==4.28.1
-tokenizers==0.13.2
+transformers==4.24.0
 sentencepiece==0.1.99
