@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM,pipeline
 
 EMBEDDING_MODEL="sentence-transformers/all-MiniLM-L6-v2"
-LLM_MODEL="google/flan-t5-base"
+LLM_MODEL="deepset/roberta-base-squad2"
 
 
 def extract_text(file):
