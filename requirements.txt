@@ -1,5 +1,6 @@
-streamlit>=1.26.0
+streamlit==1.26.0
 pdfplumber
 scikit-learn
 sentence-transformers==2.2.2
-transformers==4.24.0
+transformers==4.30.2
+
