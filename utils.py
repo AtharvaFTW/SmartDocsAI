@@ -51,5 +51,5 @@ def load_models():
     embedder=SentenceTransformer(EMBEDDING_MODEL)
     tokenizer=AutoTokenizer.from_pretrained(LLM_MODEL)
     model=AutoModelForSeq2SeqLM.from_pretrained(LLM_MODEL)
-    rag_pipeline=pipeline("text2text-generation",model=model,tokenizer=tokenizer)
+    rag_pipeline=pipeline("question-answering",model=model,tokenizer=tokenizer)
     return embedder, rag_pipeline
