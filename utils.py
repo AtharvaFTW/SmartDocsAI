@@ -1,6 +1,7 @@
 import os
 import pdfplumber
-import faiss
+from sklearn.neighbors import NearestNeigbors
+import numpy as np
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM,pipeline
 
@@ -26,15 +27,14 @@ def chunk_text(text,max_words=100):
 def embed_chunks(chunks,model):
     return model.encode(chunks,convert_to_tensor=False)
 
-def build_faiss_index(embeddings):
-    dim=len(embeddings[0])
-    index=faiss.IndexFlatL2(dim)
-    index.add(embeddings)
-    return index
+def build_knn_index(embeddings):
+    knn=NearestNeighbors(n_neighbors=3,metric="cosine")
+    knn.fit(embeddings)
+    return knn
 
 def search(query,chunks,embeddings,embedder,top_k=3):
     query_vec=embedder.encode([query])
-    index=build_faiss_index(embeddings)
+    knn=build_knn_index(embeddings)
     _,I= index.search(query_vec, top_k)
     return [chunks[i]for i in I[0]]
 
