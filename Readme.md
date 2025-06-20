@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 ---
 
-## 📦 Dependencies
+## 📦Major Dependencies
 
 ```txt
 streamlit>=1.26.0
