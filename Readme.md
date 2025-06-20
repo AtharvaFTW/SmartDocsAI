@@ -114,13 +114,3 @@ Answer:
 
 ---
 
-## 📜 License
-
-MIT License. See `LICENSE` file.
-
----
-
-## 🤝 Contributions
-
-Feel free to open issues or submit PRs. Ideas welcome!
-
