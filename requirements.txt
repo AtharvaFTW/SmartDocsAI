@@ -1,7 +1,0 @@
-streamlit>=1.26.0
-pdfplumber
-scikit-learn
-sentence-transformers==2.2.2
-transformers==4.24.0
-tokenizers==0.13.2
-https://files.pythonhosted.org/packages/1c/64/07e3a662d13cdbf76cb9f018473efbd15aefb03f79e6f799934aecc7c9e6/sentencepiece-0.1.99-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
