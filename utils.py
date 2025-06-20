@@ -1,12 +1,12 @@
 import os
 import pdfplumber
-from sklearn.neighbors import NearestNeigbors
+import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM,pipeline
 
 EMBEDDING_MODEL="sentence-transformers/all-MiniLM-L6-v2"
-LLM_MODEL="deepset/roberta-base-squad2"
+LLM_MODEL="google/flan-t5-base"
 
 
 def extract_text(file):
@@ -27,14 +27,15 @@ def chunk_text(text,max_words=100):
 def embed_chunks(chunks,model):
     return model.encode(chunks,convert_to_tensor=False)
 
-def build_knn_index(embeddings):
-    knn=NearestNeighbors(n_neighbors=3,metric="cosine")
-    knn.fit(embeddings)
-    return knn
+def build_faiss_index(embeddings):
+    dim=embeddings.shape[1]
+    index=faiss.IndexFlatL2(dim)
+    index.add(embeddings)
+    return index
 
 def search(query,chunks,embeddings,embedder,top_k=3):
     query_vec=embedder.encode([query])
-    knn=build_knn_index(embeddings)
+    index=build_faiss_index(embeddings)
     _,I= index.search(query_vec, top_k)
     return [chunks[i]for i in I[0]]
 
@@ -51,5 +52,5 @@ def load_models():
     embedder=SentenceTransformer(EMBEDDING_MODEL)
     tokenizer=AutoTokenizer.from_pretrained(LLM_MODEL)
     model=AutoModelForSeq2SeqLM.from_pretrained(LLM_MODEL)
-    rag_pipeline=pipeline("question-answering",model=model,tokenizer=tokenizer)
+    rag_pipeline=pipeline("text2text-generation",model=model,tokenizer=tokenizer)
     return embedder, rag_pipeline
